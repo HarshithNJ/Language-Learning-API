@@ -75,5 +75,22 @@ public class wordService {
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
         }
     }
+
+    public ResponseEntity<Object> getWord(String startLetter) {
+        List<word> words = repository.findByStartLetter(startLetter);
+
+        if(words.isEmpty()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "no words found with the letter : " + startLetter);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "words found");
+            map.put("words", words);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
     
 }

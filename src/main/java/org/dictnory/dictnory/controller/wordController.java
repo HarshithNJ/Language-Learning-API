@@ -42,4 +42,9 @@ public class wordController {
         return service.getAllWords();
     }
 
+    @GetMapping("/words/{startLetter}")
+    public ResponseEntity<Object> getWord(@RequestParam String startLetter){
+        return service.getWord(startLetter);
+    }
+
 }
