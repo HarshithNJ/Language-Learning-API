@@ -6,9 +6,12 @@ import org.dictnory.dictnory.dto.word;
 import org.dictnory.dictnory.service.wordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 public class wordController {
@@ -26,4 +29,17 @@ public class wordController {
     public ResponseEntity<Object> addMultipleWord(@RequestBody List<word> words){
         return service.addMultipleWords(words);
     }
+
+
+
+
+
+
+
+    // To Get a word from a dictionary
+    @GetMapping("/words")
+    public ResponseEntity<Object> geAlltWords() {
+        return service.getAllWords();
+    }
+
 }

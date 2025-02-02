@@ -51,5 +51,29 @@ public class wordService {
 
         return new ResponseEntity<Object>(map, HttpStatus.CREATED);
     }
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> getAllWords() {
+        List<word> words = repository.findAll();
+
+        if(words.isEmpty()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "no words found");
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "words found");
+            map.put("words", words);
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
     
 }
