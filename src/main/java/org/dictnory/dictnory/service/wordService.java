@@ -1,6 +1,7 @@
 package org.dictnory.dictnory.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.dictnory.dictnory.dto.word;
@@ -31,6 +32,24 @@ public class wordService {
 
             return new ResponseEntity<Object>(map, HttpStatus.CREATED);
         }
+    }
+
+    public ResponseEntity<Object> addMultipleWords(List<word> words) {
+        for(word word : words){
+            if(repository.existsByWord(word)){
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("error", "word already exists");
+    
+                return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
+            }
+        }
+        repository.saveAll(words);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("success", "word added successfully");
+        map.put("Word", words);
+
+        return new ResponseEntity<Object>(map, HttpStatus.CREATED);
     }
     
 }

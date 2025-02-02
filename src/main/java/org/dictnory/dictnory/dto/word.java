@@ -14,7 +14,7 @@ public class word {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private char letter;
+    private String letter;
     private String word;
     private String translation;
     private String language;

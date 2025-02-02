@@ -1,5 +1,7 @@
 package org.dictnory.dictnory.controller;
 
+import java.util.List;
+
 import org.dictnory.dictnory.dto.word;
 import org.dictnory.dictnory.service.wordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +22,8 @@ public class wordController {
         return service.addWord(word);
     }
     
+    @PostMapping("/words/multiple")
+    public ResponseEntity<Object> addMultipleWord(@RequestBody List<word> words){
+        return service.addMultipleWords(words);
+    }
 }
