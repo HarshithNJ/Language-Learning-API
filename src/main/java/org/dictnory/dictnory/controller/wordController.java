@@ -7,6 +7,7 @@ import org.dictnory.dictnory.service.wordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,11 @@ public class wordController {
     @GetMapping("/words")
     public ResponseEntity<Object> geAlltWords() {
         return service.getAllWords();
+    }
+
+    @GetMapping("/words/{startLetter}")
+    public ResponseEntity<Object> getWordsStartingWith(@PathVariable char startLetter) {
+        return service.getWordsStartingWith(startLetter);
     }
     
 
