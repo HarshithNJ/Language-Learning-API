@@ -9,6 +9,4 @@ public interface wordRepository extends JpaRepository<word, Integer> {
 
     boolean existsByWord(word word);
 
-    List<word> findByStartLetter(String startLetter);
-
 }

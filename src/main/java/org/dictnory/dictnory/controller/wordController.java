@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -41,10 +40,6 @@ public class wordController {
     public ResponseEntity<Object> geAlltWords() {
         return service.getAllWords();
     }
-
-    @GetMapping("/words/{startLetter}")
-    public ResponseEntity<Object> getWord(@RequestParam String startLetter){
-        return service.getWord(startLetter);
-    }
+    
 
 }

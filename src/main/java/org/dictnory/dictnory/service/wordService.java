@@ -18,12 +18,12 @@ public class wordService {
     wordRepository repository;
 
     public ResponseEntity<Object> addWord(word word) {
-        if(repository.existsByWord(word)){
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("error", "word already exists");
+        // if(repository.existsByWord(word)){
+        //     Map<String, Object> map = new HashMap<String, Object>();
+        //     map.put("error", "word already exists");
 
-            return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
-        }else{
+        //     return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
+        // }else{
             repository.save(word);
 
             Map<String, Object> map = new HashMap<String, Object>();
@@ -31,7 +31,7 @@ public class wordService {
             map.put("Word", word);
 
             return new ResponseEntity<Object>(map, HttpStatus.CREATED);
-        }
+        // }
     }
 
     public ResponseEntity<Object> addMultipleWords(List<word> words) {
@@ -65,23 +65,6 @@ public class wordService {
         if(words.isEmpty()){
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("error", "no words found");
-
-            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
-        }else{
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("success", "words found");
-            map.put("words", words);
-
-            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
-        }
-    }
-
-    public ResponseEntity<Object> getWord(String startLetter) {
-        List<word> words = repository.findByStartLetter(startLetter);
-
-        if(words.isEmpty()){
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("error", "no words found with the letter : " + startLetter);
 
             return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }else{
