@@ -3,6 +3,7 @@ package org.dictnory.dictnory.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.dictnory.dictnory.dto.word;
 import org.dictnory.dictnory.repository.wordRepository;
@@ -90,6 +91,23 @@ public class wordService {
             map.put("words", li);
 
             return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }
+    }
+
+    public ResponseEntity<Object> getByWord(String word) {
+        Optional<word> op = repository.findByWord(word);
+
+        if(op.isPresent()){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "word found");
+            map.put("word", op.get());
+
+            return new ResponseEntity<Object>(map, HttpStatus.FOUND);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No data found on the word : "+word);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
     

@@ -47,5 +47,9 @@ public class wordController {
         return service.getWordsStartingWith(startLetter);
     }
     
+    @GetMapping("/words/word/{word}")
+    public ResponseEntity<Object> getByWord(@PathVariable String word) {
+        return service.getByWord(word);
+    }
 
 }
