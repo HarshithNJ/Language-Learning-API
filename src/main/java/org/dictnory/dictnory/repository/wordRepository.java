@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface wordRepository extends JpaRepository<word, Integer> {
 
-    boolean existsByWord(word word);
+    boolean existsByWord(String word);
 
 }

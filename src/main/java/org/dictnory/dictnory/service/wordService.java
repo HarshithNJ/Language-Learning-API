@@ -18,12 +18,12 @@ public class wordService {
     wordRepository repository;
 
     public ResponseEntity<Object> addWord(word word) {
-        // if(repository.existsByWord(word)){
-        //     Map<String, Object> map = new HashMap<String, Object>();
-        //     map.put("error", "word already exists");
+        if(repository.existsByWord(word.getWord())){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "word already exists");
 
-        //     return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
-        // }else{
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_ACCEPTABLE);
+        }else{
             repository.save(word);
 
             Map<String, Object> map = new HashMap<String, Object>();
@@ -31,12 +31,12 @@ public class wordService {
             map.put("Word", word);
 
             return new ResponseEntity<Object>(map, HttpStatus.CREATED);
-        // }
+        }
     }
 
     public ResponseEntity<Object> addMultipleWords(List<word> words) {
         for(word word : words){
-            if(repository.existsByWord(word)){
+            if(repository.existsByWord(word.getWord())){
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("error", "word already exists");
     
