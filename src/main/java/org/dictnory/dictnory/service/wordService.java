@@ -110,5 +110,74 @@ public class wordService {
             return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
         }
     }
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> deleteWord(String word) {
+        Optional<word> op = repository.findByWord(word);
+
+        if(op.isPresent()){
+            repository.deleteById(op.get().getId());
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "word deleted successfully");
+            map.put("word", op.get());
+
+            return new ResponseEntity<Object>(map, HttpStatus.OK);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No data found on the word : "+word);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
+
+
+
+
+
+
+    public ResponseEntity<Object> updateWord(int id, word word) {
+        Optional<word> op = repository.findById(id);
+        if(op.isPresent()){
+            word w = op.get();
+
+            if(word.getStartLetter() != '\0')
+                w.setStartLetter(word.getStartLetter());
+
+            if(word.getWord() != null)
+                w.setWord(word.getWord());
+
+            if(word.getTranslation() != null)
+                w.setTranslation(word.getTranslation());
+
+            if(word.getLanguage() != null)
+                w.setLanguage(word.getLanguage());
+
+            if(word.getExampleSentence() != null)
+                w.setExampleSentence(word.getExampleSentence());
+            
+            repository.save(w);
+
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("success", "word updated successfully");
+            map.put("word", w);
+
+            return new ResponseEntity<Object>(map, HttpStatus.OK);
+        }else{
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("error", "No data found on the word : "+id);
+
+            return new ResponseEntity<Object>(map, HttpStatus.NOT_FOUND);
+        }
+    }
     
 }

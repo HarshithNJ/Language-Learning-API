@@ -6,7 +6,9 @@ import org.dictnory.dictnory.dto.word;
 import org.dictnory.dictnory.service.wordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,6 +52,30 @@ public class wordController {
     @GetMapping("/words/word/{word}")
     public ResponseEntity<Object> getByWord(@PathVariable String word) {
         return service.getByWord(word);
+    }
+
+
+
+
+
+
+
+    //To Delete a word from a dictnory
+    @DeleteMapping("/words/{word}")
+    public ResponseEntity<Object> deleteWord(@PathVariable String word) {
+        return service.deleteWord(word);
+    }
+
+
+
+
+
+
+
+    //To Update a word in a dictnory
+    @PatchMapping("/words/{id}")
+    public ResponseEntity<Object> updateWord(@PathVariable int id, @RequestBody word word) {
+        return service.updateWord(id, word);
     }
 
 }
